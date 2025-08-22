@@ -4,31 +4,36 @@
     "slug": "SunFlower",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo.png",
+    "icon": "./assets/images/logoMain.png",
     "scheme": "sunflower",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/logoMain.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F3DB75"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.SunFlower"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/logoMain.png",
+        "backgroundColor": "#F3DB75"
       }
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/logo.png"
+      "favicon": "./assets/images/logoMain.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/logo.png",
+          "image": "./assets/images/logoMain.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"

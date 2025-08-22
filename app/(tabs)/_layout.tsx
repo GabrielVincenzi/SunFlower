@@ -1,26 +1,22 @@
 import { icons } from '@/constants/icons'
-import { images } from '@/constants/images'
 import { Tabs } from 'expo-router'
 import React from 'react'
-import { Image, ImageBackground, Text, View } from 'react-native'
+import { Image, View } from 'react-native'
 
 const TabIcon = ({ focused, icon, title }: any) => {
     if (focused) {
         return (
-            <ImageBackground
-                source={images.highlight}
-                className='flex flex-row w-full flex-1 min-w-[112px] min-h-16 mt-4 justify-center items-center rounded-full overflow-hidden gap-x-2'
+            <View
+                className='flex flex-row w-full flex-1 min-w-[100px] min-h-16 mt-4 justify-center items-center rounded-full overflow-hidden gap-x-2'
             >
-                <Image source={icon}
-                    tintColor="#151312" className="size-5" />
-                <Text className='text-white text-base dont-semibold'>{title}</Text>
-            </ImageBackground>
+                <Image source={icon} tintColor="#F3DB75" className="size-6" />
+            </View>
         )
     }
     else {
         return (
             <View className='size-full justify-center items-center rounded-full mt-4'>
-                <Image source={icon} tintColor="#A8B5DB"
+                <Image source={icon} tintColor="#000000"
                     className='size-5' />
             </View>
         )
@@ -39,15 +35,15 @@ const _Layout = () => {
                     alignItems: 'center'
                 },
                 tabBarStyle: {
-                    backgroundColor: '#0f0d23',
+                    backgroundColor: '#ffffff',
                     borderRadius: 50,
-                    marginHorizontal: 20,
-                    marginBottom: 36,
+                    marginHorizontal: 16,
+                    marginBottom: 16,
                     height: 52,
                     position: 'absolute',
                     overflow: 'hidden',
                     borderWidth: 1,
-                    borderColor: '0f0D23'
+                    borderColor: '#ffffff'
                 }
             }}
         >

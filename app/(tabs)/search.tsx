@@ -1,29 +1,40 @@
 import SearchBar from "@/components/SearchBar";
 import SunCard from "@/components/SunCard";
 import { images } from "@/constants/images";
-import { fetchMovies } from '@/services/apiPlaceholder';
+import { fetchAllChartLines } from '@/services/api';
 import useFetch from '@/services/useFetch';
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
+import { useFocusEffect } from "expo-router";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, FlatList, Image, Text, TextInput, View } from "react-native";
 
 
 const search = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const inputRef = useRef<TextInput>(null);
+
+    useFocusEffect(
+        useCallback(() => {
+            const timeout = setTimeout(() => {
+                inputRef.current?.focus();
+            }, 100);
+            return () => clearTimeout(timeout);
+        }, [])
+    );
 
     const {
-        data: movies,
+        data: plot,
         loading,
         error,
-        refetch: loadMovies,
+        refetch: loadPlot,
         reset,
-    } = useFetch(() => fetchMovies({ query: searchQuery }), false) //autoFetch = false - for user search first
+    } = useFetch(() => fetchAllChartLines({ query: searchQuery }), false);
 
     useEffect(() => {
-        const timeoutId = setTimeout(async () => { // to wait for the user to type
+        const timeoutId = setTimeout(async () => {
             if (searchQuery.trim()) {
-                await loadMovies();
+                await loadPlot();
             } else {
-                reset()
+                reset();
             }
         }, 500);
 
@@ -32,13 +43,11 @@ const search = () => {
 
 
     return (
-        <View className="flex-1 bg-white">
-            <Image source={images.bg} className="flex-1 absolute w-full z-0" resizeMode='cover' />
+        <View className="flex-1 bg-background px-10">
             <FlatList
-                data={movies}
+                data={plot}
                 renderItem={({ item }) => <SunCard {...item} />}
                 keyExtractor={(item) => item.id.toString()}
-                className='px-5'
                 numColumns={3}
                 columnWrapperStyle={{
                     justifyContent: 'flex-start',
@@ -56,6 +65,8 @@ const search = () => {
                                 placeholder='Search ...'
                                 value={searchQuery}
                                 onChangeText={(text: string) => setSearchQuery(text)}
+                                editable={true}
+                                autoFocus={true}
                             />
                         </View>
                         {loading && (
@@ -74,9 +85,9 @@ const search = () => {
                 }
                 ListEmptyComponent={
                     !loading && !error ? (
-                        <View className='mt-10 px-5'>
+                        <View className='mt-10 px-10'>
                             <Text className='text-center text-gray-500'>
-                                {searchQuery.trim() ? 'No movies found' : 'The future of Data Driven Information is here'}
+                                {searchQuery.trim() ? 'No plot found' : 'The future of Data Driven Information is here'}
                             </Text>
                         </View>
                     ) : null

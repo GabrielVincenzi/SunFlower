@@ -41,7 +41,7 @@ const SignIn = () => {
             style={{ flex: 1 }}
             behavior={Platform.OS === 'ios' ? 'padding' : "height"}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <ScrollView className="flex-1 bg-white" showsVerticalScrollIndicator={false} contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}>
+                <ScrollView className="flex-1 bg-background" showsVerticalScrollIndicator={false} contentContainerStyle={{ minHeight: "100%", paddingBottom: 10 }}>
                     <View className="flex-1">
                         <View className="relative w-full h-[150px]">
                             <Image source={images.bg} className="z-0 w-full h-full" />
